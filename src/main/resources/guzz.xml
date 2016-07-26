@@ -45,7 +45,7 @@
     <!--<business name="user" dbgroup="default" class="org.guzz.test.User" interpret=""-->
     <!--file="classpath:org/guzz/test/User.hbm.xml"/>-->
 
-    <business-scan dbgroup="mysql5" resources="classpath:com.liukai.myguzz.domain.*.java"/>
+    <business-scan dbgroup="mysql5" resources="classpath:/com/liukai/myguzz/domain.*.class"/>
 
     <!--
         service：用于外挂系统服务。name为服务名称，在程序中可以通过name查询到服务实例；configName为配置信息组名称，class为服务实现客户端。class必须实现org.guzz.Service接口。
