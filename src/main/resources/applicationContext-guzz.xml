@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--guzz框架-->
+    <bean id="guzzContext" class="org.guzz.web.context.spring.GuzzContextBeanFactory"
+          factory-method="createGuzzContext">
+        <constructor-arg index="0" value="classpath:guzz.xml"/>
+    </bean>
+
+    <!--guzzBaseDao-->
+    <bean id="guzzBaseDao" class="org.guzz.dao.GuzzBaseDao">
+        <property name="guzzContext" ref="guzzContext"/>
+        <property name="writeTemplate">
+            <bean class="org.guzz.transaction.SoloWriteTemplate">
+                <property name="guzzContext" ref="guzzContext"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--guzz事务管理器-->
+    <bean id="guzzTransactionManager" class="org.guzz.web.context.spring.GuzzTransactionManager">
+        <property name="guzzContext" ref="guzzContext"/>
+    </bean>
+
+    <!--事务通知器-->
+    <tx:advice id="guzzAdvice" transaction-manager="guzzTransactionManager">
+        <tx:attributes>
+            <tx:method name="*" rollback-for="Exception" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="guzzPoint" expression="execution(* *.manager.*..*(..))"/>
+        <aop:advisor advice-ref="guzzAdvice" pointcut-ref="guzzPoint"/>
+    </aop:config>
+
+    <!--开启AOP注解驱动-->
+    <aop:aspectj-autoproxy/>
+
+</beans>
