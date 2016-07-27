@@ -56,4 +56,28 @@
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
+    <!--集成异常处理 -->
+    <!--方案一：使用SimpleMappingExceptionResolver实现异常处理 -->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--&lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;-->
+        <!--<property name="defaultErrorView" value="/error/error"></property>-->
+        <!--&lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;-->
+        <!--<property name="exceptionAttribute" value="ex"></property>-->
+        <!--&lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="com.liukai.myguzz.exception.DataParseException">/error/error-dataparse</prop>-->
+                <!--<prop key="com.liukai.myguzz.exception.InvalidParamException">/error/error-invalidparam</prop>-->
+                <!--<prop key="com.liukai.myguzz.exception.UnknownException">/error/error-unknown</prop>-->
+
+                <!--&lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--方案二：实现HandlerExceptionResolver 接口自定义异常处理器-->
+    <!--<bean id="myExceptionHandler" class="com.liukai.myguzz.exception.handler.MyExceptionHandler"/>-->
+
+    <!--方案三：使用@ExceptionHandler注解实现异常处理 -->
+
 </beans>
