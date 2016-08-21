@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
@@ -6,7 +7,18 @@
 </head>
 <body>
 
-<p><fmt:message key="i18n.name">nihao</fmt:message>123</p>
+<%--<fmt:formatDate value="2016-08-14 11:11:11" pattern="yyyy-MM-dd hh:mm:ss"/>--%>
+<fmt:parseDate pattern="yyyy-MM-dd hh:mm:ss" value="2016-08-14 11:11:11"/>
+
+<fmt:setLocale value="zh"/>
+<fmt:setBundle basename="i18n" var="lang"/>
+
+<%--<fmt:message key="count.one" bundle="${lang}"/><br/>--%>
+<%--<fmt:message key="count.two" bundle="${lang}"/><br/>--%>
+<%--<fmt:message key="count.three" bundle="${lang}"/><br/>--%>
+
+<fmt:message key="i18n.name" bundle="${lang}"/><br/>
+
 
 <h1>所有的演示例子</h1>
 <h3>[url=./dao.do?id=1]Dao正常错误[/url]</h3>

@@ -11,9 +11,7 @@
 
     <!--改为guzz启动监听-->
     <listener>
-        <listener-class>
-            org.guzz.web.context.spring.GuzzWithSpringContextLoaderListener
-        </listener-class>
+        <listener-class>org.guzz.web.context.spring.GuzzWithSpringContextLoaderListener</listener-class>
     </listener>
 
     <!--转码过滤器-->

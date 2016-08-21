@@ -14,11 +14,6 @@
     <!--guzzBaseDao-->
     <bean id="guzzBaseDao" class="org.guzz.dao.GuzzBaseDao">
         <property name="guzzContext" ref="guzzContext"/>
-        <property name="writeTemplate">
-            <bean class="org.guzz.transaction.SoloWriteTemplate">
-                <property name="guzzContext" ref="guzzContext"/>
-            </bean>
-        </property>
     </bean>
 
     <!--guzz事务管理器-->

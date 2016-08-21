@@ -1,5 +1,7 @@
 package com.liukai.myguzz.domain;
 
+import com.liukai.myguzz.bean.AgentStatusRecordBean;
+import com.liukai.myguzz.common.CommonBean;
 import org.guzz.annotations.GenericGenerator;
 import org.guzz.annotations.Table;
 
@@ -12,7 +14,7 @@ import java.util.Date;
 @javax.persistence.Entity
 @org.guzz.annotations.Entity(businessName = "agentStatusRecord")
 @Table(name = "im_agent_status_record")
-public class AgentStatusRecord {
+public class AgentStatusRecord extends CommonBean {
 
     /**
      * 坐席状态
@@ -88,15 +90,7 @@ public class AgentStatusRecord {
         this.busyReson = busyReson;
     }
 
-    public AgentStatusRecord convertToSessionRecord() {
-        AgentStatusRecord record = new AgentStatusRecord();
-        record.setId(this.getId());
-        record.setAgentId(this.getAgentId());
-        record.setSignInDate(this.getSignInDate());
-        record.setSessionNum(this.getSessionNum());
-        record.setStatus(this.getStatus());
-        record.setBusyReson(this.getBusyReson());
-
-        return record;
+    public AgentStatusRecordBean convertToAgentStatusRecordBean() {
+        return new AgentStatusRecordBean(id, agentId, signInDate, sessionNum, status, busyReson);
     }
 }

@@ -19,6 +19,7 @@ public class MyExceptionAnnotationHandler {
     public String exp(HttpServletRequest request, Exception ex) {
 
         request.setAttribute("ex", ex);
+        System.out.println(ex);
 
         if (ex instanceof DataParseException) {
             return "/error/error-dataparse";
