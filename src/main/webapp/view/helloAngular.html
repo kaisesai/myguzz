@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloAngular</title>
+    <!--<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="/css/animate.css" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="/css/simple-line-icons.css" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="/css/font.css" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="/css/app.css" type="text/css"/>-->
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    名: <input type="text" ng-model="firstName"><br>
+    姓: <input type="text" ng-model="lastName"><br>
+    <br>
+    姓名: {{firstName + " " + lastName}}
+    <span>{{ clock.now}}</span>
+
+    <!--<input type="text" ng-model="myUrl"/>-->
+    <!--<div my-directive-->
+         <!--some-attr="{{ myUrl }}"-->
+         <!--my-link-text="Click me to go to Google">-->
+    <!--</div>-->
+
+    <label>Their URL field:</label>
+    <input type="text" ng-model="theirUrl">
+    <div my-directive
+         some-attr="theirUrl"
+         my-link-text="Click me to go to Google"></div>
+
+</div>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope) {
+        $scope.firstName = "John";
+        $scope.lastName = "Doe";
+
+        $scope.clock = {
+            now: new Date()
+        };
+        var updateClock = function () {
+            $scope.clock.now = new Date();
+        };
+        setInterval(function () {
+            $scope.$apply(updateClock);
+        }, 1000);
+        updateClock();
+
+    });
+
+    app.directive('myDirective', function () {
+        return {
+            restrict: 'A',
+            replace: true,
+//            scope: {
+//                myUrl: '@someAttr', //绑定策略
+//                myLinkText: '@' //绑定策略
+//            },
+//            template: '<a href="{{myUrl}}" target="_blank">' +
+//            '{{myLinkText}}</a>'
+            scope: {
+                myUrl: '=someAttr', // 经过了修改
+                myLinkText: '@'
+            },
+            template: '<div><label>My Url Field:</label><input type="text" ng-model="myUrl" /><a href="{{myUrl}}">{{myLinkText}}</a></div>'
+        };
+    });
+
+    app.run(function($rootScope, $timeout) {
+        $rootScope.isDisabled = true;
+        $timeout(function() {
+            $rootScope.isDisabled = false;
+            console.log(new Date());
+        }, 5000);
+    });
+
+</script>
+</body>
+</html>

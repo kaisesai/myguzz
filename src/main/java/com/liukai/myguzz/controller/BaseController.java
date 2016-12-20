@@ -3,6 +3,7 @@ package com.liukai.myguzz.controller;
 import com.liukai.myguzz.exception.DataParseException;
 import com.liukai.myguzz.exception.InvalidParamException;
 import com.liukai.myguzz.exception.UnknownException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BaseController {
 
-    // @ExceptionHandler
+    @ExceptionHandler
     public String exp(HttpServletRequest request, Exception ex) {
 
         request.setAttribute("ex", ex);
